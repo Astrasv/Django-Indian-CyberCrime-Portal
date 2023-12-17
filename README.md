@@ -14,7 +14,7 @@ This project is a Cybercrime Portal specifically designed for India. It serves a
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/cybercrime-portal.git
+   git clone https://github.com/Astrasv/cybercrime-portal.git
    ```
 
 2. **Create and activate a virtual environment:**
