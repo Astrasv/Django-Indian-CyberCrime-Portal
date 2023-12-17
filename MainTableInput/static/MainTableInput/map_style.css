@@ -1,0 +1,38 @@
+
+body {
+    background-color: #000;
+    color: #0ef;
+}
+
+
+.header{
+    text-align: center;
+    font-size: 2em;
+    text-shadow: 0 0 10px #0ef, 0 0 20px #0ef, 0 0 30px #0ef, 0 0 40px #0ef, 0 0 50px #0ef;
+}
+
+
+#map {
+    margin: 0 auto;
+    border: 2px solid #0ef;
+    box-shadow: 0 0 10px #0ef;
+    
+}
+
+
+a {
+    color: #0ef;
+    margin-right:200px;
+    font-size: large;
+}
+
+a:hover{
+    color: #fff;
+}
+
+.mapMain{
+    margin: 20px;
+}
+
+
+  

@@ -1,0 +1,153 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" title="Coding design">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cyber Crime records</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'MainTableInput/Listing_style.css' %}">
+    
+
+    <script>
+  
+        document.addEventListener('DOMContentLoaded', function () {
+            const search = document.querySelector('.input-group input'),
+                table_rows = document.querySelectorAll('tbody tr'),
+                table_headings = document.querySelectorAll('thead th');
+
+            // 1. Searching for specific data of HTML table
+
+            search.addEventListener('input', searchTable);
+
+            function searchTable() {
+                const searchTerm = search.value.toLowerCase().trim();
+
+                table_rows.forEach((row, i) => {
+                    let cells = Array.from(row.querySelectorAll('td'));
+                    let found = false;
+
+                    cells.forEach(cell => {
+                        let cellText = cell.textContent.toLowerCase().trim();
+                        if (cellText.includes(searchTerm)) {
+                            found = true;
+                        }
+                    });
+
+                    row.classList.toggle('hide', !found);
+                    row.style.setProperty('--delay', i / 25 + 's');
+                });
+
+                document.querySelectorAll('tbody tr:not(.hide)').forEach((visible_row, i) => {
+                    visible_row.style.backgroundColor = i % 2 === 0 ? 'transparent' : '#0000000b';
+                });
+            }
+
+            // 2. Sorting | Ordering data of HTML table
+
+            table_headings.forEach((head, i) => {
+                let sort_asc = true;
+                head.onclick = () => {
+                    table_headings.forEach(head => head.classList.remove('active'));
+                    head.classList.add('active');
+
+                    document.querySelectorAll('td').forEach(td => td.classList.remove('active'));
+                    table_rows.forEach(row => {
+                        row.querySelectorAll('td')[i].classList.add('active');
+                    })
+
+                    head.classList.toggle('asc', sort_asc);
+                    sort_asc = head.classList.contains('asc') ? false : true;
+
+                    sortTable(i, sort_asc);
+                }
+            })
+
+
+            function sortTable(column, sort_asc) {
+                [...table_rows].sort((a, b) => {
+                    if (column === 0) {
+                        let first_row = parseInt(a.querySelectorAll('td')[column].textContent),
+                            second_row = parseInt(b.querySelectorAll('td')[column].textContent);
+                        return sort_asc ? first_row - second_row : second_row - first_row;
+                    } else {
+                        let first_row = a.querySelectorAll('td')[column].textContent.toLowerCase(),
+                            second_row = b.querySelectorAll('td')[column].textContent.toLowerCase();
+                        return sort_asc ? (first_row < second_row ? -1 : 1) : (first_row < second_row ? 1 : -1);
+                    }
+                    return sort_asc ? (first_row < second_row ? 1 : -1) : (first_row < second_row ? -1 : 1);
+                })
+                    .map(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
+            }
+
+
+        });
+
+    </script>
+
+
+</head>
+
+<body>
+    <header class="header">
+        <a href = {% url 'blog-home'%} class="logo">Go to Main Page</a>
+        <nav class="navbar">
+            <a href="{% url 'list-cybercrime' %}">Overall list</a>
+            <a href="{% url 'list-victims' %}">Victims list</a>
+            <a href="{% url 'list-investigators' %}">Investigators List</a>
+            <a href="{% url 'visualise-cybercrime' %}">Map visuvaliser</a>
+        </nav>
+    </header>
+
+    <main class="table">
+        <section class="table__header">
+            <h1>Cyber Crime Records</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+            </div>
+            
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> ID </th>
+                        <th> Name </th>
+                        <th> Age </th>
+                        <th> Gender </th>
+                        <th> Description </th>
+                        <th> Update </th>
+                        <th> Delete </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for obj in records %}
+                    <tr>  
+                        <td> {{ obj.id }} </td>
+                        <td> {{ obj.suspect_name }} </td>
+                        <td> {{ obj.age }} </td>
+                        <td> {{ obj.gender }} </td>
+                        <td> {{ obj.description }} </td>
+                        <td> 
+                                <a href="{% url "update-suspects" obj.id %}" class="update">Update</a>        
+                        </td>
+                        <td>
+                            <a href="{% url "delete-suspects" obj.id %}" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+              
+              
+        </section>
+    </main>
+
+
+</body>
+
+</html>

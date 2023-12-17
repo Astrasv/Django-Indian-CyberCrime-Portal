@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report AI</title>
+</head>
+<body>
+    <h3>Write instructions</h3>
+
+    <form method = "POST">
+        
+        {% csrf_token %}
+        <input type="text" class="form-control" name="user_input">
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+</body>
+</html>

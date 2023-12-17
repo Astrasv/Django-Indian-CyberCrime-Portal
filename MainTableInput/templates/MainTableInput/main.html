@@ -1,0 +1,78 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Crime record entry</title>
+  <link rel="stylesheet" type = "text/css" href="{% static 'MainTableInput/Main_style.css' %}">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <form action="" method="POST">
+      <h1>
+        Enter Your CyberCrime record
+        <br>
+        
+        <a href = "{% url 'blog-home' %}" id = "addrec">Go to Home Page</a>
+
+      </h1>
+      <br>
+
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Description</label>
+        {{ form.description }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.date_reported.id_for_label }}">Date Reported</label>
+        {{ form.date_reported }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.city.id_for_label }}">City</label>
+        {{ form.city }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.crime.id_for_label }}">Crime Type</label>
+        {{ form.crime }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.motive.id_for_label }}">Motive</label>
+        {{ form.motive }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.victim.id_for_label }}">
+          Victim 
+          <br>
+          <a href = "{% url 'create-victim' %}" id = "addrec">Add New victim</a>
+        </label>
+        
+        {{ form.victim }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.suspect.id_for_label }}">
+          Suspect
+          <br>
+          <a href = "{% url 'create-suspect' %}" id = "addrec">Add New Suspect</a>
+        </label>
+        {{ form.suspect }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.investigator.id_for_label }}">
+          Investigator
+          <br>
+          <a href = "{% url 'create-investigator' %}" id = "addrec">Add New Investigator</a>
+        </label>
+        {{ form.investigator }}
+    </div>
+
+      <button type="submit" class="btn">Submit</button>
+
+      
+    </form>
+  </div>
+</body>
+</html>

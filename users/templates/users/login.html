@@ -1,0 +1,29 @@
+<!-- Note we can also use base template from another app inside a new app -->
+<!-- Check App's settings bottom to see where the page  is redirected to after login -->
+
+{% extends "blogApp/base.html" %}
+{% load crispy_forms_tags %} {% comment %} Allows us to use crispy filter on forms  {% endcomment %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %} <!-- Used for security purpose and is a MUST -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Login</legend>
+
+                {{ form|crispy }}  
+                <!-- NOTE: Since we have connected this to built in login page at urls.py,content in the same form tag varies for reigister, login and logout-->
+
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Login</button>
+            </div>
+        </form>
+
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need An account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

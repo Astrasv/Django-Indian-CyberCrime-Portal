@@ -1,0 +1,25 @@
+{% extends "blogApp/base.html" %}
+{% load crispy_forms_tags %} {% comment %} Allows us to use crispy filter on forms  {% endcomment %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %} <!-- Used for security purpose and is a MUST -->
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Blog Post</legend>
+                
+                <!-- The form variable access the whole form (UserCreationForm) which we imported in the views -->
+                <!-- We can use form.as_p is for clearer styling using p tags. But we have crispy now--> 
+                <!-- Just the | crispy does all the stylings. We need not do anything -->
+                
+                {{ form|crispy }}  
+                <!-- NOTE: Since we have connected this to built in login page at urls.py,content in the same form tag varies for reigister, login and logout-->
+
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+            </div>
+        </form>
+
+    </div>
+{% endblock content %}

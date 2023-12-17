@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type = "text/css" href="{% static 'blogApp/main.css' %}">
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Indian Cyber Crime portal</title>
+  </head>
+  <body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+          <div class="container">
+
+            <!-- Using the blog NAME attr in urls in the url below -->
+            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Indian Cyber-Crime Portal</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                  <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                  <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                  <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+
+                {% else %}
+                  <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                  <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+
+
+              </div>
+            </div>
+          </div>
+        </nav>
+    </header>
+    
+    <main role="main" class="container">
+        <div class="row">
+          {% comment %} This entire div is for the messages we get from the User App and NOT blogApp {% endcomment %}
+        
+          <div class="col-md-9 extraMargin">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}"> <!-- message.tages specifies whether its sucess or error or .. Bootstrap alert and django alret go hand in hand-->
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock content %}
+
+          </div>
+
+          <div class="col-md-3">
+            <div class="content-section extraMargin">
+              <h3>QUICK TASK BAR</h3>
+              <p class='text-muted'>Navigate to all the main database pages here
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-light"><a href = "{% url 'create-cybercrime' %}">Add Records</a></li>
+                  <li class="list-group-item list-group-item-light"><a href = "{% url 'list-cybercrime' %}">View Records</a></li>
+                  <li class="list-group-item list-group-item-light"><a href = "{% url 'visualise-cybercrime' %}">Map Visuvalisation</a></li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
