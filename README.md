@@ -2,6 +2,15 @@
 
 This project is a Cybercrime Portal specifically designed for India. It serves as a centralized platform to manage, report, and visualize cybercrime incidents across the country.
 
+# Table of Contents
+
+1. [Features](#features)
+2. [Demo Video](#demo)
+3. [Setup Instructions](#setup-instructions)
+4. [Usage](#usage)
+5. [Acknowledgments](#acknowledgments)
+
+
 ## Features
 
 - **CRUD Operations:** Allows Create, Read, Update, and Delete functionalities for cybercrime incidents and data.
@@ -9,6 +18,10 @@ This project is a Cybercrime Portal specifically designed for India. It serves a
 - **User Authentication:** Implements secure user authentication and access control mechanisms.
 - **Incident Reporting:** Enables users to report cybercrime incidents with relevant details.
 - **Data Analysis Tools:** Provides tools for analyzing trends, patterns, and statistics related to cybercrime.
+
+## Demo
+[![Video Preview]](https://drive.google.com/file/d/1HkiJoR6I3VQCWsbgdS-N5xc58WHmhqqc/view?usp=drive_link)
+
 
 ## Setup Instructions
 
